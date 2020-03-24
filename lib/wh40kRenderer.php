@@ -74,7 +74,7 @@ class wh40kRenderer extends Renderer {
         $unit['points'] = array($unit['points']);
         if(count($unit['roster']) > 0) {
             $this->renderLine();
-            $this->renderContents('Roster', $unit['roster']);
+            $this->renderContents('Roster', $unit['roster'], $unit['roster_exp'], $unit['slot']);
         }
 
         # wound tracker:
@@ -403,21 +403,24 @@ class wh40kRenderer extends Renderer {
         return $this->currentY;
     }
 
-    protected function renderContents($label="Something", $data=array()) {
+    protected function renderContents($label="Something", $data=array(), $weapons=array(), $slot='') {
         $text = strtoupper($label);
         $fontSize = $this->getFontSize(); 
         $this->renderText($this->currentX + 80, $this->currentY + 20, $text, 40, $fontSize);
 
-        $data     = array_unique($data);
-        foreach($data as $model) {
+        #$data     = array_unique($data);
+
+        foreach($data as $index => $model) {
             $leftMargin = $this->bigBoys ? 250 : 190;
             $width = $this->bigBoys ? 100 : 65;
-            $this->currentY += $this->renderText($this->currentX + $leftMargin, $this->currentY + 19, $model, $width, $fontSize);
+            if(count($data)>1) {
+                $textString = strtoupper($model).' ('.$weapons[$index].')';
+            } else {
+                $textString = strtoupper($model);
+            }
+            $this->currentY += $this->renderText($this->currentX + $leftMargin, $this->currentY + 19, $textString, $width, $fontSize);
             $this->currentY += 4;
         }
-        #$contents = strtoupper(implode(', ', $data));
-
-
         return $this->currentY;
     }
 

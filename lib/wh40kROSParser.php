@@ -191,15 +191,40 @@ class wh40kROSParser extends wh40kParser {
         // roster
         if((string) $d['type'] == 'model') {
             $clean['roster'][] = (string) $d['number'].' '.(string) $d['name'];
+            $clean['roster_exp'][] = '';
         }
         if($d->selections->selection) {
             foreach($d->selections->selection as $dd) {
                 if((string) $dd['type'] == 'model') {
                     $clean['roster'][] = (string) $dd['number'].' '.(string) $dd['name'];
+                    #get model weapons
+                    if($dd->selections->selection) {
+                        $weaponSelection = array();
+                        foreach($dd->selections->selection as $ws) {
+                            $weaponSelection[] = $ws['number'].' '.$ws['name'];
+                        }
+                        ksort($weaponSelection);
+                        $weaponString = implode(', ', $weaponSelection);
+                    } else {
+                        $weaponString = '';
+                    }
+                    $clean['roster_exp'][] = $weaponString;
                     if($dd->selections->selection) {
                         foreach($dd->selections->selection as $ddd) {
                             if((string) $ddd['type'] == 'model') {
                                 $clean['roster'][] = (string) $ddd['number'].' '.(string) $ddd['name'];
+                                #get model weapons
+                                if($dd->selections->selection) {
+                                    $weaponSelection = array();
+                                    foreach($dd->selections->selection as $ws) {
+                                        $weaponSelection[] = $ws['number'].' '.$ws['name'];
+                                    }
+                                    ksort($weaponSelection);
+                                    $weaponString = implode(', ', $weaponSelection);
+                                } else {
+                                    $weaponString = '';
+                                }
+                                $clean['roster_exp'][] = $weaponString;
                             }
                         }
                     }
@@ -215,6 +240,7 @@ class wh40kROSParser extends wh40kParser {
             }
             if($notInRoster == true) {
                 $clean['roster'][] = '1 '.$model['Unit'];
+                $clean['roster_exp'][] = '';
             }
         }
 

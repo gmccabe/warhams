@@ -36,6 +36,7 @@ class wh40kParser {
             'rules'       => array(),     # ATSKNF, etc
             'factions'    => array(),     # IMPERIUM, etc
             'roster'      => array(),     # 7 marines, 1 heavy weapon, sarge, etc
+            'roster_exp'  => array(),     # weapons listings for each model
             'keywords'    => array()      # INFANTRY, TANK, etc
         );
 
