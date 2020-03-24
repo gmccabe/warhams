@@ -92,7 +92,7 @@ class wh40kRenderer extends Renderer {
         }
 
         $this->renderBorder();
-        $this->renderWatermark();
+        #$this->renderWatermark();
     }
 
     protected function renderHeader($unit) {
@@ -444,7 +444,7 @@ class wh40kRenderer extends Renderer {
                     'power'  => 69
                 ));
             }
-            $this->renderWatermark();
+            #$this->renderWatermark();
 
             $url = '/var/tmp/'.uniqid().'.png';
             $preview = clone $this->image;
