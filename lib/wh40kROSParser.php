@@ -195,7 +195,7 @@ class wh40kROSParser extends wh40kParser {
         }
         if($d->selections->selection) {
             foreach($d->selections->selection as $dd) {
-                if((string) $dd['type'] == 'model') {
+                if(((string) $dd['type'] == 'model') or (((string) $dd['type'] == 'upgrade') and (((string) $dd['name'] != 'Warlord') and (string) $dd->profiles->profile['typeName'] != 'Abilities' and (string) $dd->profiles->profile['typeName'] != 'Weapon'))) {
                     $clean['roster'][] = (string) $dd['number'].' '.(string) $dd['name'];
                     #get model weapons
                     if($dd->selections->selection) {

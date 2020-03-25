@@ -413,7 +413,7 @@ class wh40kRenderer extends Renderer {
         foreach($data as $index => $model) {
             $leftMargin = $this->bigBoys ? 250 : 190;
             $width = $this->bigBoys ? 100 : 65;
-            if(count($data)>1) {
+            if(strlen($weapons[$index])>0) {
                 $textString = strtoupper($model).' ('.$weapons[$index].')';
             } else {
                 $textString = strtoupper($model);
