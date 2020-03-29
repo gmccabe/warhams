@@ -245,7 +245,7 @@ class wh40kROSParser extends wh40kParser {
         foreach($clean['model_stat'] as $model) {
             $notInRoster = true;
             foreach($clean['roster'] as $rank) { 
-                if(strpos($rank, $model['Unit'])) {
+                if(strpos($rank, $model['Unit']) or strpos($rank. ' (Jump Pack)', $model['Unit']) ) {
                     $notInRoster = false;
                 }
             }
